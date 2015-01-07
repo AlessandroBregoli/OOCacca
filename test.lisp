@@ -13,6 +13,7 @@
 (assert (not (check_args '(1 2))))
 (assert (not (check_args '(a ciao 123 bhu))))
 (assert (check_args '(ciao 5)))
+(assert (check_args '(:ciao 5)))
 (assert (check_args '()))
 (assert (not (check_parent 'nonesiste)))
 (add-class-spec 'nonesiste '(nonesiste () ()))
