@@ -1,0 +1,12 @@
+(defun new (clname) 
+	(let ((attributi (make-hash-table))
+	      (metodi (make-hash-table))
+	      (prototipo (get-class-spec clname))
+	     )
+	     (progn 
+		(deep_copy (car prototipo) attributi)
+		(deep_copy (cdr prototipo) metodi)
+		(cons attributi metodi)
+	     )
+	)
+)

@@ -1,14 +1,28 @@
 (defun define-class (name parent &rest coppie)
 	(if (not (and 
-		(check_name name) 
+		(check_name name)
 		(check_parent parent) 
 		(check_args coppie)
 		(class_not_exists name)
 		))
 		(error "")
-				
-		(add-class-spec nome (cons (make-hash-table) (make-hash-table))
+		
+		
+		(progn
+			(add-class-spec name (init_hmaps parent))
+			(init-slots (get-class-spec name) coppie)
+		)
 	)
+)
+
+(defun init-slots (classe coppie)
+	(if (null coppie)
+		T
+	;else
+		(progn 
+			(set-slot classe (first coppie) (second coppie))
+			(init-slots classe (rest (rest coppie)))
+		)
 	)
 )
 

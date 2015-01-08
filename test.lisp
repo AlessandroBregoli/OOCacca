@@ -1,14 +1,18 @@
-;(define-class ’person nil ’name "Eve" ’age "undefined")
+(define-class 'person nil 'name "Eve" 'age "undefined")
 
-; (define-class ’student ’person
-;	’name "Eva Lu Ator"
-	;’university "Berkeley"
-	;’talk ’(method ()
-		;(princ "My name is ")
-		;(princ (get-slot this ’name))
-		;(terpri)
-		;(princ "My age is ")
-		;(princ (get-slot this ’age))))
+(define-class 'student 'person
+	'name "Eva Lu Ator"
+	'university "Berkeley"
+	'talk '(method ()
+		(princ "My name is ")
+		(princ (get-slot this 'name))
+		(terpri)
+		(princ "My age is ")
+		(princ (get-slot this 'age)))
+	'setScazzato '(method (bool)
+			(set-slot this 'scazzato bool)
+		)
+	)
 (assert (not (check_args '(1 2 3))))
 (assert (not (check_args '(1 2))))
 (assert (not (check_args '(a ciao 123 bhu))))
@@ -19,3 +23,17 @@
 (add-class-spec 'nonesiste '(nonesiste () ()))
 (assert (check_parent 'nonesiste))
 (assert (check_parent nil))
+(assert (methodp '(method ()
+(princ "Mi chiamo ")
+(princ (get-slot this 'name))
+(terpri)
+(princ "e studio alla Bicocca.")
+(terpri))))
+(assert (not (methodp '(42))))
+
+(defparameter pippo (new 'student))
+(set-slot pippo 'scazzato 10)
+(assert (eq (get-slot pippo 'scazzato) 10))
+(assert (not (get-slot pippo 'ciao)))
+(setScazzato pippo 3)
+(assert (eq (get-slot pippo 'scazzato) 3))
