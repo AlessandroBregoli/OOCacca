@@ -10,6 +10,7 @@
 		(princ "My age is ")
 		(princ (get-slot this 'age)))
 	'setScazzato '(method (bool)
+			(print "son vivo")
 			(set-slot this 'scazzato bool)
 		)
 	)

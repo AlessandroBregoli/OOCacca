@@ -2,8 +2,14 @@
 (defun methodp (value)
 	(and (listp value) (> (length value) 2) (eq 'method (first value)))
 )
-(defun def_method (lista)
-	(list 'lambda (second lista) (prognizza (rest (rest lista))))
+(defun call_method (this nome args)
+	(let 
+		(
+		  (arglist (cons 'this (second(gethash nome (cdr this)))))
+		  (corpofunz (prognizza (rest (rest (gethash nome (cdr this))))))
+		)
+		(apply (eval (list 'lambda arglist corpofunz)) (cons this args))
+	)
 )
 (defun prognizza (operazioni)
 	(cons 'progn operazioni)
@@ -27,7 +33,7 @@
 		;se è un metodo serve esportare la funzione
 		(if (methodp valore)
 			(eval (list 'defun campo '(this &rest args)
-				(list 'apply (def_method valore) 'args))
+				(list 'call_method 'this (list 'quote campo) 'args))
 			)
 		)
 	     )
