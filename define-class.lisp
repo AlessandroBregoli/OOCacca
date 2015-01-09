@@ -11,15 +11,19 @@
 		(progn
 			(add-class-spec name (init_hmaps parent))
 			(init-slots (get-class-spec name) coppie)
+			name
 		)
 	)
 )
 
-(defun init-slots (classe coppie)
+(defun init-slots (classe coppie &optional (is_istance nil))
 	(if (null coppie)
 		T
 	;else
 		(progn 
+			(if (and is_istance (not (has_member (car classe) (first coppie))))
+				(error "Attributo ~s non trovato" (first coppie))
+			)
 			(set-slot classe (first coppie) (second coppie))
 			(init-slots classe (rest (rest coppie)))
 		)
