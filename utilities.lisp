@@ -1,3 +1,5 @@
+
+;gestione di class-spec come suggerito dalla specifica
 (defparameter *classes-specs* (make-hash-table))
 
 (defun add-class-spec (name class-spec)
@@ -5,6 +7,8 @@
 (defun get-class-spec (name)
 	(gethash name *classes-specs*))
 
+;deep_copy copia i valori tra due hashmap; l'hash map di origine
+;deve contenere la lista __names__ perché ciò funzioni.
 (defun deep_copy (table1 table2)
 	(mapcar (lambda (name) 
 		(setf (gethash name table2) 
@@ -13,9 +17,12 @@
 	)
 )
 
+;crea la lista __names__ che tiene traccia dei membri delle hashmap
 (defun init_names_list (hmap)
 	(progn	(setf (gethash '__names__ hmap) '(__names__)))
 		 hmap)
+
+;inizializza la lista dei nomi dei membri dell'hashmap
 (defun init_hmaps (parent) 
 	(let	((attributi (make-hash-table))
 		(metodi (make-hash-table)))
@@ -32,7 +39,8 @@
 		)
 	)
 )
-
+;controlla se hashmap ha un membro, tramite lista __names__
+;(quindi funziona anche se un membro è impostato a nil)
 (defun has_member (hmap memname)
 	(member memname (gethash '__names__ hmap))
 )
