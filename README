@@ -1,0 +1,17 @@
+OOL in lisp
+
+Paradigma object-oriented con ereditarietà singola tra classi
+
+Si definisce una classe con (define-class nome parent [campo valore]* )
+dove "nome" e "campo" devono essere simboli, valore può essere una
+qualsiasi espressione lisp; in particolare per aggiungere un metodo, 
+usare '(method (arg1,arg2) (operazione) (operazione))
+"parent" può essere nil
+
+Si istanzia una classe con (new classe [campo valore]*), dove "campo" è un
+attributo della classe che deve esistere.
+
+Si legge un attributo con (get-slot istanza campo).
+
+L'implementazione utilizza per ogni classe 2 hashmap (una per i metodi, una per
+i campi).
