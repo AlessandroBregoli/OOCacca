@@ -1,3 +1,4 @@
+Progetto consegnato per l'anno accademico 2014/2015 con risultato 30
 OOL in lisp
 
 Paradigma object-oriented con ereditarietà singola tra classi
